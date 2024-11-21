@@ -30,7 +30,7 @@
   </mat-checkbox>
 
   <!-- Botón Save -->
-  <button mat-raised-button color="primary" (click)="saveForm()">
+  <button mat-raised-button color="primary" (click)="saveForm()" [disabled]="!this.form.valid">
     Save
   </button>
 </form>
