@@ -1,27 +1,36 @@
 <h1>{{ title }}</h1>
 
-<!-- Campo de texto -->
-<mat-form-field appearance="fill" style="width: 100%; margin-bottom: 16px;">
-  <mat-label>Enter Text</mat-label>
-  <input matInput [(ngModel)]="formData.textInput" />
-</mat-form-field>
+<!-- Formulario Reactivo -->
+<form [formGroup]="form">
+  <!-- Campo de texto -->
+  <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>Enter Text</mat-label>
+    <input matInput formControlName="textInput" />
+    <mat-error *ngIf="form.get('textInput')?.hasError('required')">
+      Text is required
+    </mat-error>
+  </mat-form-field>
 
-<!-- Select -->
-<mat-form-field appearance="fill" style="width: 100%; margin-bottom: 16px;">
-  <mat-label>Select an Option</mat-label>
-  <mat-select [(ngModel)]="formData.selectedOption">
-    <mat-option *ngFor="let option of options" [value]="option">
-      {{ option }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+  <!-- Select -->
+  <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 16px;">
+    <mat-label>Select an Option</mat-label>
+    <mat-select formControlName="selectedOption">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('selectedOption')?.hasError('required')">
+      Selection is required
+    </mat-error>
+  </mat-form-field>
 
-<!-- Checkbox -->
-<mat-checkbox [(ngModel)]="formData.isChecked" style="margin-bottom: 16px;">
-  I agree to the terms and conditions
-</mat-checkbox>
+  <!-- Checkbox -->
+  <mat-checkbox formControlName="isChecked" style="margin-bottom: 16px;">
+    I agree to the terms and conditions
+  </mat-checkbox>
 
-<!-- Botón Save -->
-<button mat-raised-button color="primary" (click)="saveForm()">
-  Save
-</button>
+  <!-- Botón Save -->
+  <button mat-raised-button color="primary" (click)="saveForm()">
+    Save
+  </button>
+</form>
